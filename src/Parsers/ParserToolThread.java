@@ -116,6 +116,14 @@ public class ParserToolThread extends Thread {
             e.printStackTrace();
         }
     }
+
+    /**
+     * this method runs the CodeShovel parser
+     * @param t
+     */
+    public void startCodeShovelParser(Tool t) {
+
+    }
     
     /**
      *run method executed by threads to use parsers 
