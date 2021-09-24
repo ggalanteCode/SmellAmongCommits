@@ -14,12 +14,7 @@ import javax.swing.ImageIcon;
 import com.google.common.base.Stopwatch;
 import models.Project;
 import repository.RepositoryHandler;
-import tools.Analyze;
-import tools.JcodeOdor;
-import tools.SourceMeter;
-import tools.SpotBugs;
-import tools.Tool;
-import tools.PhDSmells;
+import tools.*;
 import utils.CliUtils;
 import java.io.File;
 import java.util.logging.Level;
@@ -38,6 +33,7 @@ public class Parameters extends javax.swing.JDialog {
     private SpotBugs sb;
     private JcodeOdor jo;
     private PhDSmells phDSmells;
+    private CodeShovel codeShovel;
     private String commitId;
     private RepositoryHandler gr;
     private String MVNParam="/C mvn clean install";
@@ -625,6 +621,14 @@ public class Parameters extends javax.swing.JDialog {
         new CommitPicker(p);
     }//GEN-LAST:event_goBackActionPerformed
 
+    /**
+     *
+     * @param event
+     */
+    private void csLabelMouseClicked(java.awt.event.MouseEvent event) {
+
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton confirmB;
@@ -640,5 +644,8 @@ public class Parameters extends javax.swing.JDialog {
     private javax.swing.JCheckBox sbcheck;
     private javax.swing.JTextField smF;
     private javax.swing.JCheckBox smcheck;
+    private javax.swing.JLabel csLabel;
+    private javax.swing.JCheckBox csCheck;
+    private javax.swing.JTextField csF;
     // End of variables declaration//GEN-END:variables
 }
