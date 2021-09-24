@@ -6,7 +6,6 @@ import models.CodeShovelMessage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +20,8 @@ public class JSONParser {
         this.r = r;
     }
 
-    public List<String> getChangeHistoryShort() {
+    public List<CodeShovelMessage> readJsonInputStream(InputStream inputStream) throws IOException {
+        JsonReader jsonReader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
 
         return null;
     }
