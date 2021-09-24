@@ -7,6 +7,7 @@ package Parsers;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -122,7 +123,16 @@ public class ParserToolThread extends Thread {
      * @param t
      */
     public void startCodeShovelParser(Tool t) {
-
+        try {
+            CodeShovelParser codeShovelParser = new CodeShovelParser(idCommit, projectUrl);
+            CodeShovel codeShovel = (CodeShovel) t;
+            String absolutePath = codeShovel.getToolPath()  + File.separator + codeShovelParser.getAnalyzableFile();
+            File resFile = new File(absolutePath);
+            codeShovelParser.execute(new BufferedReader(new FileReader(resFile)));
+        } catch (FileNotFoundException e) {
+            System.err.println("Nessun file 'result.json' trovato\n");
+            e.printStackTrace();
+        }
     }
     
     /**
@@ -149,6 +159,10 @@ public class ParserToolThread extends Thread {
                 System.out.println("Partito parser di PhdProjectScripts");
                 Thread.sleep(50);
                 this.startPhDSmellsParser(tool);
+            } else if (tool instanceof CodeShovel) {
+                System.out.println("Partito parser di CodeShovel");
+                Thread.sleep(50);
+                this.startCodeShovelParser(tool);
             }
         }catch(InterruptedException e){
             System.out.println(e);
