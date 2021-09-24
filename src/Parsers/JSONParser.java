@@ -23,6 +23,11 @@ public class JSONParser {
     public List<CodeShovelMessage> readJsonInputStream(InputStream inputStream) throws IOException {
         JsonReader jsonReader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
 
+
+        return null;
+    }
+
+    private List<CodeShovelMessage> getChangeHistoryShort() {
         return null;
     }
 
