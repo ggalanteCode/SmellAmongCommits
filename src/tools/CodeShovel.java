@@ -55,9 +55,14 @@ public class CodeShovel implements Tool {
         this.exitcode = Tool.run("java", param);
     }
 
+    /**
+     * run for linux
+     */
     @Override
     public void runLin() {
-
+        System.out.println("CodeShovel started");
+        String[] param = {"/bin/bash", "-c", "cd " + defaultParam};
+        this.exitcode = Tool.run("java", param);
     }
 
     @Override
