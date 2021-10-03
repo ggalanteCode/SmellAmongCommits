@@ -1,5 +1,8 @@
 package tools;
 
+import models.Class;
+import models.Commit;
+import models.Method;
 import models.Project;
 
 import java.io.File;
@@ -29,19 +32,50 @@ public class CodeShovel implements Tool {
         return toolPath;
     }
 
-    private final String toolPath;
+    private String toolPath;
 
     public String getProjectPath() {
         return projectPath;
     }
 
-    private final String projectPath;
+    private String projectPath;
 
+    public String getStartCommit() {
+        return startCommit;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    private String projectName;
+
+    private String startCommit = "";
+
+    public String getTargetFilePath() {
+        return targetFilePath;
+    }
+
+    private String targetFilePath = "";
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    private String methodName = "";
+
+    private int methodStartLine;
+
+    public String getOutputFilePath() {
+        return outputFilePath;
+    }
+
+    private String outputFilePath;
 
     public CodeShovel(Project project) {
         this.projectPath = project.getPath();
         this.toolPath = new File(RUNWIN).getAbsolutePath();
-        this.defaultParam = toolPath + " && java -jar " + toolName + " " + projectPath;
+        this.defaultParam = toolPath + " && java -jar " + toolName + " " + projectPath + " " + startCommit + " " + targetFilePath + " " + methodName + " " + methodStartLine;
     }
 
 
@@ -65,6 +99,10 @@ public class CodeShovel implements Tool {
         this.exitcode = Tool.run("java", param);
     }
 
+    /**
+     * returns the exit code
+     * @return
+     */
     @Override
     public int getExitCode() {
         return exitcode;
