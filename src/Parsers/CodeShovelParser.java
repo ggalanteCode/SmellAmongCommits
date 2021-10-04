@@ -1,8 +1,14 @@
 package Parsers;
 
-import java.io.BufferedReader;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
+import models.SourceCodeHistory;
+
+import java.util.Set;
 
 /**
+ *
  * this class parses the results in the output file produced by the tool for method-level source code histories
  * (CodeShovel) and writes the parsed results on the 'sbac' database
  * @author Giovanni Galante
@@ -17,19 +23,52 @@ public class CodeShovelParser {
     private String urlProject;
     private String commitId;
 
-    public CodeShovelParser(String commitId, String URLProject) {
+    public JSONReader getJsonReader() {
+        return jsonReader;
+    }
+
+    public void setJsonReader(JSONReader jsonReader) {
+        this.jsonReader = jsonReader;
+    }
+
+    private JSONReader jsonReader;
+
+    public CodeShovelParser(String urlProject, String commitId, JSONReader jsonReader) {
+        setJsonReader(jsonReader);
+        this.urlProject = urlProject;
         this.commitId = commitId;
-        this.urlProject = URLProject;
     }
 
     /**
-     * reads the output file using a buffered reader
-     * @param bufferedReader the buffered reader
+     * reads the output file
      */
-    public void execute(BufferedReader bufferedReader) {
-        //try {
+    public void execute() {
+        JsonObject object = jsonReader.readFromJSON(this.getAnalyzableFile());
+        Set<String> keySet = object.keySet();
+        SourceCodeHistory history = new SourceCodeHistory();
+        for (String s: keySet) {
+            switch (s) {
+                case "origin":
+                    history.setOrigin(object.get(s).getAsString());
+                    break;
+                case "repositoryName":
+                    history.setRepositoryName(object.get(s).getAsString());
+                    break;
+                case "repositoryPath":
+                    history.setRepositoryPath(object.get(s).getAsString());
+                    break;
+                case "":
+                default:
 
-        //}
+            }
+        }
     }
 
+    /**
+     * analyze and write the output file's results in the database
+     */
+    public void analyzeWrite() {
+        jsonReader.writeInDB();
+
+    }
 }
