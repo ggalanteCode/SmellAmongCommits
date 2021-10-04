@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import com.google.gson.stream.JsonReader;
 import tools.*;
 
 /**
@@ -123,16 +124,15 @@ public class ParserToolThread extends Thread {
      * @param t
      */
     public void startCodeShovelParser(Tool t) {
-        try {
-            CodeShovelParser codeShovelParser = new CodeShovelParser(idCommit, projectUrl);
-            CodeShovel codeShovel = (CodeShovel) t;
-            String absolutePath = codeShovel.getToolPath()  + File.separator + codeShovelParser.getAnalyzableFile();
-            File resFile = new File(absolutePath);
-            codeShovelParser.execute(new BufferedReader(new FileReader(resFile)));
-        } catch (FileNotFoundException e) {
-            System.err.println("Nessun file 'result.json' trovato\n");
-            e.printStackTrace();
-        }
+        CodeShovel codeShovel = (CodeShovel) t;
+        JSONFileReader jsonFileReader = new JSONFileReader();
+        CodeShovelParser parser = new CodeShovelParser(projectUrl, idCommit, jsonFileReader);
+        String outputFileAbsolutePath = codeShovel.getToolPath() + File.separator + parser.getAnalyzableFile();
+        File resultFile = new File(outputFileAbsolutePath);
+        jsonFileReader.setResultJSON(resultFile);
+        parser.execute();
+        resultFile.delete();
+        System.out.println("Parser CodeShovel terminato");
     }
     
     /**

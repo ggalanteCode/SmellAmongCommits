@@ -7,6 +7,7 @@ package database;
 
 import com.jcabi.github.*;
 import java.io.IOException;
+import java.lang.Class;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,14 +21,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import gui.Download;
-import models.BugCollection;
-import models.BugIstance;
+import models.*;
 import models.Commit;
 import models.Error;
-import models.Method;
-import models.Project;
-import models.Variable;
-import models.IssueCollection;
 import models.Package;
 
 /**
@@ -118,7 +114,7 @@ public class DbHandler {
                                     PreparedSQL.METRICCLASSCOLLECTION+
                                     PreparedSQL.METRICMETHODCOLLECTION+
                                     PreparedSQL.METRICPACKAGECOLLECTION
-                                    );
+                                    /*PreparedSQL.SOURCECODEHISTORIES*/);
             System.err.println("Sbac : Created tables on db");
         } catch (SQLException ex) {
             System.err.println("Sbac : Failed to create tables on db \n"+ex);
@@ -486,6 +482,30 @@ public class DbHandler {
             if(stmt!=null)
                 stmt.close();
         }
+    }
+
+    public static int insertSourceCodeHistory(SourceCodeHistory sch, int idc) throws SQLException {
+        //TODO implement method
+        PreparedStatement statement = null;
+        try {
+            if (sch != null) {
+                statement = connection.prepareStatement(PreparedSQL.INSERTSOURCECODEHISTORY);
+
+            } else return -1;
+        }catch (SQLException e) {
+            Logger.getLogger(DbHandler.class.getName()).log(Level.SEVERE, null, e);
+            printSQLException(e);
+            return -1;
+        } finally {
+            if (statement!= null) {
+                statement.close();
+            }
+        }
+        return 0;
+    }
+
+    public static int insertSourceCodeChange(SourceCodeChange scc, int idc) throws SQLException {
+        return 0;
     }
     
     /*

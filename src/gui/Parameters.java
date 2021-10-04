@@ -59,6 +59,7 @@ public class Parameters extends javax.swing.JDialog {
         sb = new SpotBugs(p);
         jo = new JcodeOdor(p);
         phDSmells = new PhDSmells(p);
+        //codeShovel = new CodeShovel(p);
         smF.setText(sm.getDefaultParam());  
         sbF.setText(sb.getDefaultParam());   
         PhdSmellsF.setText(phDSmells.getDefaultParam());//test
@@ -85,6 +86,9 @@ public class Parameters extends javax.swing.JDialog {
         sbcheck = new javax.swing.JCheckBox();
         smcheck = new javax.swing.JCheckBox();
         phScheck = new javax.swing.JCheckBox();
+        //csCheck = new javax.swing.JCheckBox();
+        //csF = new javax.swing.JTextField();
+        //csLabel = new javax.swing.JLabel();
         goBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -114,6 +118,14 @@ public class Parameters extends javax.swing.JDialog {
                 jLabel3MouseClicked(evt);
             }
         });
+        /*
+        csLabel.setBackground(new java.awt.Color(255, 255, 255));
+        csLabel.setText("CodeShovel");
+        csLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                csLabelMouseClicked(evt);
+            }
+        });*/
 
         confirmB.setBackground(new java.awt.Color(0, 0, 0));
         confirmB.setForeground(new java.awt.Color(255, 255, 255));
@@ -620,13 +632,8 @@ public class Parameters extends javax.swing.JDialog {
         dispose();
         new CommitPicker(p);
     }//GEN-LAST:event_goBackActionPerformed
-
-    /**
-     *
-     * @param event
-     */
     private void csLabelMouseClicked(java.awt.event.MouseEvent event) {
-
+        new Helper("CodeShovel usage: <repopath> <startcommit> <targetfilepath> <methodname> <methodstartline>");
     }
 
 
