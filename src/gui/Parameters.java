@@ -277,7 +277,7 @@ public class Parameters extends javax.swing.JDialog {
             if(!PhdSmellsF.getText().equals(phDSmells.getDefaultParam()))
                 phDSmells.setDefaultParam(PhdSmellsF.getText());
             tools.add(phDSmells);
-        }
+        }//TODO add in if for select CS
     
         if(tools.isEmpty())
             new Dialog("you have to select at least one tool to analyze");
