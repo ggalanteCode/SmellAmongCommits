@@ -450,9 +450,13 @@ public class PreparedSQL {
                                                          "       version text not null references commit on delete cascade on update cascade, \n"+
                                                          "       url text not null references project on delete cascade on update cascade\n"+
                                                          ") ;";
-    /*public static final String SOURCECODEHISTORIES = "create table sourcecodehistories (\n"+
+    public static final String SOURCECODEHISTORIES = "create table sourcecodehistories (\n"+
                                                      "       id serial not null primary key, \n"+
-                                                     ") ;";*/
+                                                     "repositoryname text not null, \n"+
+                                                     "repositorypath text not null, \n"+
+                                                     "startcommitname text not null, \n"+
+                                                     "sourcefilename text not null, \n"+
+                                                     ") ;";
     /*public static final String SOURCECODECHANGE = "";*/
       
    
