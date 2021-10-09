@@ -5,8 +5,6 @@
  */
 package database;
 
-import com.jcabi.github.*;
-import java.io.IOException;
 import java.lang.Class;
 import java.sql.Array;
 import java.sql.Connection;
@@ -24,7 +22,6 @@ import gui.Download;
 import models.*;
 import models.Commit;
 import models.Error;
-import models.Package;
 
 /**
     * Class used to manage all the interactions with database
@@ -484,7 +481,7 @@ public class DbHandler {
         }
     }
 
-    public static int insertSourceCodeHistory(SourceCodeHistory sch, int idc) throws SQLException {
+    public static int insertCodeShovelResult(CodeShovelResult sch, int idc) throws SQLException {
         //TODO implement method
         PreparedStatement statement = null;
         try {
@@ -504,7 +501,9 @@ public class DbHandler {
         return 0;
     }
 
-    public static int insertSourceCodeChange(SourceCodeChange scc, int idc) throws SQLException {
+    public static int insertChangeHistory(ChangeHistory scc, int idc) throws SQLException {
+        PreparedStatement statement = null;
+
         return 0;
     }
     
